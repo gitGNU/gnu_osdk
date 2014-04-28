@@ -1,0 +1,863 @@
+	mov	ecx, 29h
+	mov	ebx, isr29h
+	call	set_idesc
+
+	mov	ecx, 2ah
+	mov	ebx, isr2ah
+	call	set_idesc
+
+	mov	ecx, 2bh
+	mov	ebx, isr2bh
+	call	set_idesc
+
+	mov	ecx, 2ch
+	mov	ebx, isr2ch
+	call	set_idesc
+
+	mov	ecx, 2dh
+	mov	ebx, isr2dh
+	call	set_idesc
+
+	mov	ecx, 2eh
+	mov	ebx, isr2eh
+	call	set_idesc
+
+	mov	ecx, 2fh
+	mov	ebx, isr2fh
+	call	set_idesc
+
+	mov	ecx, 30h
+	mov	ebx, isr30h
+	call	set_idesc
+
+	mov	ecx, 31h
+	mov	ebx, isr31h
+	call	set_idesc
+
+	mov	ecx, 32h
+	mov	ebx, isr32h
+	call	set_idesc
+
+	mov	ecx, 33h
+	mov	ebx, isr33h
+	call	set_idesc
+
+	mov	ecx, 34h
+	mov	ebx, isr34h
+	call	set_idesc
+
+	mov	ecx, 35h
+	mov	ebx, isr35h
+	call	set_idesc
+
+	mov	ecx, 36h
+	mov	ebx, isr36h
+	call	set_idesc
+
+	mov	ecx, 37h
+	mov	ebx, isr37h
+	call	set_idesc
+
+	mov	ecx, 38h
+	mov	ebx, isr38h
+	call	set_idesc
+
+	mov	ecx, 39h
+	mov	ebx, isr39h
+	call	set_idesc
+
+	mov	ecx, 3ah
+	mov	ebx, isr3ah
+	call	set_idesc
+
+	mov	ecx, 3bh
+	mov	ebx, isr3bh
+	call	set_idesc
+
+	mov	ecx, 3ch
+	mov	ebx, isr3ch
+	call	set_idesc
+
+	mov	ecx, 3dh
+	mov	ebx, isr3dh
+	call	set_idesc
+
+	mov	ecx, 3eh
+	mov	ebx, isr3eh
+	call	set_idesc
+
+	mov	ecx, 3fh
+	mov	ebx, isr3fh
+	call	set_idesc
+
+	mov	ecx, 40h
+	mov	ebx, isr40h
+	call	set_idesc
+
+	mov	ecx, 41h
+	mov	ebx, isr41h
+	call	set_idesc
+
+	mov	ecx, 42h
+	mov	ebx, isr42h
+	call	set_idesc
+
+	mov	ecx, 43h
+	mov	ebx, isr43h
+	call	set_idesc
+
+	mov	ecx, 44h
+	mov	ebx, isr44h
+	call	set_idesc
+
+	mov	ecx, 45h
+	mov	ebx, isr45h
+	call	set_idesc
+
+	mov	ecx, 46h
+	mov	ebx, isr46h
+	call	set_idesc
+
+	mov	ecx, 47h
+	mov	ebx, isr47h
+	call	set_idesc
+
+	mov	ecx, 48h
+	mov	ebx, isr48h
+	call	set_idesc
+
+	mov	ecx, 49h
+	mov	ebx, isr49h
+	call	set_idesc
+
+	mov	ecx, 4ah
+	mov	ebx, isr4ah
+	call	set_idesc
+
+	mov	ecx, 4bh
+	mov	ebx, isr4bh
+	call	set_idesc
+
+	mov	ecx, 4ch
+	mov	ebx, isr4ch
+	call	set_idesc
+
+	mov	ecx, 4dh
+	mov	ebx, isr4dh
+	call	set_idesc
+
+	mov	ecx, 4eh
+	mov	ebx, isr4eh
+	call	set_idesc
+
+	mov	ecx, 4fh
+	mov	ebx, isr4fh
+	call	set_idesc
+
+	mov	ecx, 50h
+	mov	ebx, isr50h
+	call	set_idesc
+
+	mov	ecx, 51h
+	mov	ebx, isr51h
+	call	set_idesc
+
+	mov	ecx, 52h
+	mov	ebx, isr52h
+	call	set_idesc
+
+	mov	ecx, 53h
+	mov	ebx, isr53h
+	call	set_idesc
+
+	mov	ecx, 54h
+	mov	ebx, isr54h
+	call	set_idesc
+
+	mov	ecx, 55h
+	mov	ebx, isr55h
+	call	set_idesc
+
+	mov	ecx, 56h
+	mov	ebx, isr56h
+	call	set_idesc
+
+	mov	ecx, 57h
+	mov	ebx, isr57h
+	call	set_idesc
+
+	mov	ecx, 58h
+	mov	ebx, isr58h
+	call	set_idesc
+
+	mov	ecx, 59h
+	mov	ebx, isr59h
+	call	set_idesc
+
+	mov	ecx, 5ah
+	mov	ebx, isr5ah
+	call	set_idesc
+
+	mov	ecx, 5bh
+	mov	ebx, isr5bh
+	call	set_idesc
+
+	mov	ecx, 5ch
+	mov	ebx, isr5ch
+	call	set_idesc
+
+	mov	ecx, 5dh
+	mov	ebx, isr5dh
+	call	set_idesc
+
+	mov	ecx, 5eh
+	mov	ebx, isr5eh
+	call	set_idesc
+
+	mov	ecx, 5fh
+	mov	ebx, isr5fh
+	call	set_idesc
+
+	mov	ecx, 60h
+	mov	ebx, isr60h
+	call	set_idesc
+
+	mov	ecx, 61h
+	mov	ebx, isr61h
+	call	set_idesc
+
+	mov	ecx, 62h
+	mov	ebx, isr62h
+	call	set_idesc
+
+	mov	ecx, 63h
+	mov	ebx, isr63h
+	call	set_idesc
+
+	mov	ecx, 64h
+	mov	ebx, isr64h
+	call	set_idesc
+
+	mov	ecx, 65h
+	mov	ebx, isr65h
+	call	set_idesc
+
+	mov	ecx, 66h
+	mov	ebx, isr66h
+	call	set_idesc
+
+	mov	ecx, 67h
+	mov	ebx, isr67h
+	call	set_idesc
+
+	mov	ecx, 68h
+	mov	ebx, isr68h
+	call	set_idesc
+
+	mov	ecx, 69h
+	mov	ebx, isr69h
+	call	set_idesc
+
+	mov	ecx, 6ah
+	mov	ebx, isr6ah
+	call	set_idesc
+
+	mov	ecx, 6bh
+	mov	ebx, isr6bh
+	call	set_idesc
+
+	mov	ecx, 6ch
+	mov	ebx, isr6ch
+	call	set_idesc
+
+	mov	ecx, 6dh
+	mov	ebx, isr6dh
+	call	set_idesc
+
+	mov	ecx, 6eh
+	mov	ebx, isr6eh
+	call	set_idesc
+
+	mov	ecx, 6fh
+	mov	ebx, isr6fh
+	call	set_idesc
+
+	mov	ecx, 70h
+	mov	ebx, isr70h
+	call	set_idesc
+
+	mov	ecx, 71h
+	mov	ebx, isr71h
+	call	set_idesc
+
+	mov	ecx, 72h
+	mov	ebx, isr72h
+	call	set_idesc
+
+	mov	ecx, 73h
+	mov	ebx, isr73h
+	call	set_idesc
+
+	mov	ecx, 74h
+	mov	ebx, isr74h
+	call	set_idesc
+
+	mov	ecx, 75h
+	mov	ebx, isr75h
+	call	set_idesc
+
+	mov	ecx, 76h
+	mov	ebx, isr76h
+	call	set_idesc
+
+	mov	ecx, 77h
+	mov	ebx, isr77h
+	call	set_idesc
+
+	mov	ecx, 78h
+	mov	ebx, isr78h
+	call	set_idesc
+
+	mov	ecx, 79h
+	mov	ebx, isr79h
+	call	set_idesc
+
+	mov	ecx, 7ah
+	mov	ebx, isr7ah
+	call	set_idesc
+
+	mov	ecx, 7bh
+	mov	ebx, isr7bh
+	call	set_idesc
+
+	mov	ecx, 7ch
+	mov	ebx, isr7ch
+	call	set_idesc
+
+	mov	ecx, 7dh
+	mov	ebx, isr7dh
+	call	set_idesc
+
+	mov	ecx, 7eh
+	mov	ebx, isr7eh
+	call	set_idesc
+
+	mov	ecx, 7fh
+	mov	ebx, isr7fh
+	call	set_idesc
+
+	mov	ecx, 80h
+	mov	ebx, isr80h
+	call	set_idesc
+
+	mov	ecx, 81h
+	mov	ebx, isr81h
+	call	set_idesc
+
+	mov	ecx, 82h
+	mov	ebx, isr82h
+	call	set_idesc
+
+	mov	ecx, 83h
+	mov	ebx, isr83h
+	call	set_idesc
+
+	mov	ecx, 84h
+	mov	ebx, isr84h
+	call	set_idesc
+
+	mov	ecx, 85h
+	mov	ebx, isr85h
+	call	set_idesc
+
+	mov	ecx, 86h
+	mov	ebx, isr86h
+	call	set_idesc
+
+	mov	ecx, 87h
+	mov	ebx, isr87h
+	call	set_idesc
+
+	mov	ecx, 88h
+	mov	ebx, isr88h
+	call	set_idesc
+
+	mov	ecx, 89h
+	mov	ebx, isr89h
+	call	set_idesc
+
+	mov	ecx, 8ah
+	mov	ebx, isr8ah
+	call	set_idesc
+
+	mov	ecx, 8bh
+	mov	ebx, isr8bh
+	call	set_idesc
+
+	mov	ecx, 8ch
+	mov	ebx, isr8ch
+	call	set_idesc
+
+	mov	ecx, 8dh
+	mov	ebx, isr8dh
+	call	set_idesc
+
+	mov	ecx, 8eh
+	mov	ebx, isr8eh
+	call	set_idesc
+
+	mov	ecx, 8fh
+	mov	ebx, isr8fh
+	call	set_idesc
+
+	mov	ecx, 90h
+	mov	ebx, isr90h
+	call	set_idesc
+
+	mov	ecx, 91h
+	mov	ebx, isr91h
+	call	set_idesc
+
+	mov	ecx, 92h
+	mov	ebx, isr92h
+	call	set_idesc
+
+	mov	ecx, 93h
+	mov	ebx, isr93h
+	call	set_idesc
+
+	mov	ecx, 94h
+	mov	ebx, isr94h
+	call	set_idesc
+
+	mov	ecx, 95h
+	mov	ebx, isr95h
+	call	set_idesc
+
+	mov	ecx, 96h
+	mov	ebx, isr96h
+	call	set_idesc
+
+	mov	ecx, 97h
+	mov	ebx, isr97h
+	call	set_idesc
+
+	mov	ecx, 98h
+	mov	ebx, isr98h
+	call	set_idesc
+
+	mov	ecx, 99h
+	mov	ebx, isr99h
+	call	set_idesc
+
+	mov	ecx, 9ah
+	mov	ebx, isr9ah
+	call	set_idesc
+
+	mov	ecx, 9bh
+	mov	ebx, isr9bh
+	call	set_idesc
+
+	mov	ecx, 9ch
+	mov	ebx, isr9ch
+	call	set_idesc
+
+	mov	ecx, 9dh
+	mov	ebx, isr9dh
+	call	set_idesc
+
+	mov	ecx, 9eh
+	mov	ebx, isr9eh
+	call	set_idesc
+
+	mov	ecx, 9fh
+	mov	ebx, isr9fh
+	call	set_idesc
+
+	mov	ecx, 0a0h
+	mov	ebx, isra0h
+	call	set_idesc
+
+	mov	ecx, 0a1h
+	mov	ebx, isra1h
+	call	set_idesc
+
+	mov	ecx, 0a2h
+	mov	ebx, isra2h
+	call	set_idesc
+
+	mov	ecx, 0a3h
+	mov	ebx, isra3h
+	call	set_idesc
+
+	mov	ecx, 0a4h
+	mov	ebx, isra4h
+	call	set_idesc
+
+	mov	ecx, 0a5h
+	mov	ebx, isra5h
+	call	set_idesc
+
+	mov	ecx, 0a6h
+	mov	ebx, isra6h
+	call	set_idesc
+
+	mov	ecx, 0a7h
+	mov	ebx, isra7h
+	call	set_idesc
+
+	mov	ecx, 0a8h
+	mov	ebx, isra8h
+	call	set_idesc
+
+	mov	ecx, 0a9h
+	mov	ebx, isra9h
+	call	set_idesc
+
+	mov	ecx, 0aah
+	mov	ebx, israah
+	call	set_idesc
+
+	mov	ecx, 0abh
+	mov	ebx, israbh
+	call	set_idesc
+
+	mov	ecx, 0ach
+	mov	ebx, israch
+	call	set_idesc
+
+	mov	ecx, 0adh
+	mov	ebx, isradh
+	call	set_idesc
+
+	mov	ecx, 0aeh
+	mov	ebx, israeh
+	call	set_idesc
+
+	mov	ecx, 0afh
+	mov	ebx, israfh
+	call	set_idesc
+
+	mov	ecx, 0b0h
+	mov	ebx, isrb0h
+	call	set_idesc
+
+	mov	ecx, 0b0h
+	mov	ebx, isrb0h
+	call	set_idesc
+
+	mov	ecx, 0b1h
+	mov	ebx, isrb1h
+	call	set_idesc
+
+	mov	ecx, 0b2h
+	mov	ebx, isrb2h
+	call	set_idesc
+
+	mov	ecx, 0b3h
+	mov	ebx, isrb3h
+	call	set_idesc
+
+	mov	ecx, 0b4h
+	mov	ebx, isrb4h
+	call	set_idesc
+
+	mov	ecx, 0b5h
+	mov	ebx, isrb5h
+	call	set_idesc
+
+	mov	ecx, 0b6h
+	mov	ebx, isrb6h
+	call	set_idesc
+
+	mov	ecx, 0b7h
+	mov	ebx, isrb7h
+	call	set_idesc
+
+	mov	ecx, 0b8h
+	mov	ebx, isrb8h
+	call	set_idesc
+
+	mov	ecx, 0b9h
+	mov	ebx, isrb9h
+	call	set_idesc
+
+	mov	ecx, 0bah
+	mov	ebx, isrbah
+	call	set_idesc
+
+	mov	ecx, 0bbh
+	mov	ebx, isrbbh
+	call	set_idesc
+
+	mov	ecx, 0bch
+	mov	ebx, isrbch
+	call	set_idesc
+
+	mov	ecx, 0bdh
+	mov	ebx, isrbdh
+	call	set_idesc
+
+	mov	ecx, 0beh
+	mov	ebx, isrbeh
+	call	set_idesc
+	
+	mov	ecx, 0bfh
+	mov	ebx, isrbfh
+	call	set_idesc
+
+	mov	ecx, 0c0h
+	mov	ebx, isrc0h
+	call	set_idesc
+
+	mov	ecx, 0c1h
+	mov	ebx, isrc1h
+	call	set_idesc
+
+	mov	ecx, 0c2h
+	mov	ebx, isrc2h
+	call	set_idesc
+
+	mov	ecx, 0c3h
+	mov	ebx, isrc3h
+	call	set_idesc
+
+	mov	ecx, 0c4h
+	mov	ebx, isrc4h
+	call	set_idesc
+
+	mov	ecx, 0c5h
+	mov	ebx, isrc5h
+	call	set_idesc
+
+	mov	ecx, 0c6h
+	mov	ebx, isrc6h
+	call	set_idesc
+
+	mov	ecx, 0c7h
+	mov	ebx, isrc7h
+	call	set_idesc
+
+	mov	ecx, 0c8h
+	mov	ebx, isrc8h
+	call	set_idesc
+
+	mov	ecx, 0c9h
+	mov	ebx, isrc9h
+	call	set_idesc
+
+	mov	ecx, 0cah
+	mov	ebx, isrcah
+	call	set_idesc
+
+	mov	ecx, 0cbh
+	mov	ebx, isrcbh
+	call	set_idesc
+
+	mov	ecx, 0cch
+	mov	ebx, isrcch
+	call	set_idesc
+
+	mov	ecx, 0cdh
+	mov	ebx, isrcdh
+	call	set_idesc
+
+	mov	ecx, 0ceh
+	mov	ebx, isrceh
+	call	set_idesc
+
+	mov	ecx, 0cfh
+	mov	ebx, isrcfh
+	call	set_idesc
+
+	mov	ecx, 0d0h
+	mov	ebx, isrd0h
+	call	set_idesc
+
+	mov	ecx, 0d1h
+	mov	ebx, isrd1h
+	call	set_idesc
+
+	mov	ecx, 0d2h
+	mov	ebx, isrd2h
+	call	set_idesc
+
+	mov	ecx, 0d3h
+	mov	ebx, isrd3h
+	call	set_idesc
+
+	mov	ecx, 0d4h
+	mov	ebx, isrd4h
+	call	set_idesc
+
+	mov	ecx, 0d5h
+	mov	ebx, isrd5h
+	call	set_idesc
+
+	mov	ecx, 0d6h
+	mov	ebx, isrd6h
+	call	set_idesc
+
+	mov	ecx, 0d7h
+	mov	ebx, isrd7h
+	call	set_idesc
+	
+	mov	ecx, 0d8h
+	mov	ebx, isrd8h
+	call	set_idesc
+
+	mov	ecx, 0d9h
+	mov	ebx, isrd9h
+	call	set_idesc
+
+	mov	ecx, 0dah
+	mov	ebx, isrdah
+	call	set_idesc
+
+	mov	ecx, 0dbh
+	mov	ebx, isrdbh
+	call	set_idesc
+
+	mov	ecx, 0dch
+	mov	ebx, isrdch
+	call	set_idesc
+
+	mov	ecx, 0ddh
+	mov	ebx, isrddh
+	call	set_idesc
+
+	mov	ecx, 0deh
+	mov	ebx, isrdeh
+	call	set_idesc
+
+	mov	ecx, 0dfh
+	mov	ebx, isrdfh
+	call	set_idesc
+
+	mov	ecx, 0e0h
+	mov	ebx, isre0h
+	call	set_idesc
+
+	mov	ecx, 0e1h
+	mov	ebx, isre1h
+	call	set_idesc
+
+	mov	ecx, 0e2h
+	mov	ebx, isre2h
+	call	set_idesc
+
+	mov	ecx, 0e3h
+	mov	ebx, isre3h
+	call	set_idesc
+
+	mov	ecx, 0e4h
+	mov	ebx, isre4h
+	call	set_idesc
+
+	mov	ecx, 0e5h
+	mov	ebx, isre5h
+	call	set_idesc
+
+	mov	ecx, 0e6h
+	mov	ebx, isre6h
+	call	set_idesc
+
+	mov	ecx, 0e7h
+	mov	ebx, isre7h
+	call	set_idesc
+
+	mov	ecx, 0e8h
+	mov	ebx, isre8h
+	call	set_idesc
+
+	mov	ecx, 0e9h
+	mov	ebx, isre9h
+	call	set_idesc
+
+	mov	ecx, 0eah
+	mov	ebx, isreah
+	call	set_idesc
+
+	mov	ecx, 0ebh
+	mov	ebx, isrebh
+	call	set_idesc
+
+	mov	ecx, 0ech
+	mov	ebx, isrech
+	call	set_idesc
+
+	mov	ecx, 0edh
+	mov	ebx, isredh
+	call	set_idesc
+	
+	mov	ecx, 0eeh
+	mov	ebx, isreeh
+	call	set_idesc
+
+	mov	ecx, 0efh
+	mov	ebx, isrefh
+	call	set_idesc
+
+	mov	ecx, 0f0h
+	mov	ebx, isrf0h
+	call	set_idesc
+
+	mov	ecx, 0f1h
+	mov	ebx, isrf1h
+	call	set_idesc
+
+	mov	ecx, 0f2h
+	mov	ebx, isrf2h
+	call	set_idesc
+
+	mov	ecx, 0f3h
+	mov	ebx, isrf3h
+	call	set_idesc
+
+	mov	ecx, 0f4h
+	mov	ebx, isrf4h
+	call	set_idesc
+
+	mov	ecx, 0f5h
+	mov	ebx, isrf5h
+	call	set_idesc
+
+	mov	ecx, 0f6h
+	mov	ebx, isrf6h
+	call	set_idesc
+
+	mov	ecx, 0f7h
+	mov	ebx, isrf7h
+	call	set_idesc
+
+	mov	ecx, 0f8h
+	mov	ebx, isrf8h
+	call	set_idesc
+
+	mov	ecx, 0f9h
+	mov	ebx, isrf9h
+	call	set_idesc
+
+	mov	ecx, 0fah
+	mov	ebx, isrfah
+	call	set_idesc
+
+	mov	ecx, 0fbh
+	mov	ebx, isrfbh
+	call	set_idesc
+
+	mov	ecx, 0fch
+	mov	ebx, isrfch
+	call	set_idesc
+
+	mov	ecx, 0fdh
+	mov	ebx, isrfdh
+	call	set_idesc
+
+	mov	ecx, 0feh
+	mov	ebx, isrfeh
+	call	set_idesc
+
+	mov	ecx, 0ffh
+	mov	ebx, isrffh
+	call	set_idesc

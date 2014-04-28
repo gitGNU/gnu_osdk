@@ -1,7 +1,5 @@
 all:
-	nasm -f elf i386.asm -o i386.o
-	ld -r i386.o -o libosdk
+	nasm -f elf i386.asm -o libosdk-i386
 clean:
-	rm -f i386.o
-	rm -f libosdk
+	rm -f libosdk-i386
 

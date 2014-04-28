@@ -1,0 +1,13 @@
+#ips:5000000
+megs: 64
+romimage: file=$BXSHARE/BIOS-bochs-latest, address=0xf0000
+vgaromimage: file=$BXSHARE/VGABIOS-elpin-2.40
+#pit: realtime=1
+#clock: realtime=0
+
+floppya: 1_44=/home/maslan/work/fd.img, status=inserted
+
+boot: a
+
+log: bochsout.txt
+

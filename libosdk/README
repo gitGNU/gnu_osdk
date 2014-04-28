@@ -5,10 +5,10 @@ you can easily build osdk
 just type:
 #make clean
 #make
-this will produce libosdk library which you can link it easily
+this will produce libosdk-i386 library which you can link it easily
 to your kernel
 just add the following line to your kernel Makefile
-ld -e start -Ttext 0x100000 libosdk kernel.o -o kernel
+ld -e start -Ttext 0x100000 libosdk-i386 kernel.o -o kernel
 assuming that kernel.o is your kernel
 
 Notice:
