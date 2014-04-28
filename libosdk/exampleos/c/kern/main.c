@@ -45,15 +45,14 @@ int main(unsigned int magic, multiboot_info_t *mbi)
 
 	/* Save CPU info in a cpuid structure */
 	osdk_get_cpuid(&cpuinfo);
-
+	
 	/* Clears the screen */
-	clearscr();
+	//clearscr();
 
 	/* Print the header */
-	printf("LibOSDK-0.1.1\n====================\n");
+	printf("LibOSDK-0.2.0\n====================\n");
 	printf("Press h to display help\n");
 	printf("CMOS Size: %d\n", sizeof(cmos_t));
-
 	printf("OSDK Code 0x%x -> 0x%x\n", osdk_get_code_start(), osdk_get_code_end());
 
 	/* Load Modules */
@@ -99,22 +98,22 @@ int main(unsigned int magic, multiboot_info_t *mbi)
 	PT = (unsigned int *) 0x101000;
 	osdk_set_pd(PD);
 
-	printf("Page DIR 0x%x | 0x%x\n", PD, osdk_get_pd());
-	printf("Page Table#0 0x%x | 0x%x\n", (unsigned int)PT, osdk_get_pt(0));
-	printf("Page Table#1 0x%x | 0x%x\n", (unsigned int)(PT)+0x1000, osdk_get_pt(1));
-	printf("Page Table#2 0x%x | 0x%x\n", (unsigned int)(PT)+0x2000, osdk_get_pt(2));
+	//printf("Page DIR 0x%x | 0x%x\n", PD, osdk_get_pd());
+	//printf("Page Table#0 0x%x | 0x%x\n", (unsigned int)PT, osdk_get_pt(0));
+	//printf("Page Table#1 0x%x | 0x%x\n", (unsigned int)(PT)+0x1000, osdk_get_pt(1));
+	//printf("Page Table#2 0x%x | 0x%x\n", (unsigned int)(PT)+0x2000, osdk_get_pt(2));
 
-	printf("[PD]#0 0x%x\n", *PD); 
-	PD++;
-	printf("[PD]#1 0x%x\n", *PD); 
-	PD++;
-	printf("[PD]#2 0x%x\n", *PD); 
+	//printf("[PD]#0 0x%x\n", *PD); 
+	//PD++;
+	//printf("[PD]#1 0x%x\n", *PD); 
+	//PD++;
+	//printf("[PD]#2 0x%x\n", *PD); 
 
-	printf("[PT]#0 0x%x\n", *PT); 
-	PT++;
-	printf("[PT]#1 0x%x\n", *PT); 
-	PT++;
-	printf("[PT]#2 0x%x\n", *PT); 
+	//printf("[PT]#0 0x%x\n", *PT); 
+	//PT++;
+	//printf("[PT]#1 0x%x\n", *PT); 
+	//PT++;
+	//printf("[PT]#2 0x%x\n", *PT); 
 
 	/* Enable Paging */
 	printf("\nEnabling paging...\n\n");
@@ -149,7 +148,7 @@ int main(unsigned int magic, multiboot_info_t *mbi)
 	//if(!osdk_table_unmap(PD, 0xC0000000))
 		//printf("ERROR Unmapping PT 0x%x\n", 0xC0000000);
 	//unsigned int *x =(unsigned int *) 0xC0000000;
-	//*x=10;
+	// *x=10;
 */
 	/* Set the timer frequency */
 	osdk_timerhz(100);
@@ -224,18 +223,19 @@ void interrupt(int num, int err)
 			}
 			break;
 		case INT13:
-			printf("Error: 0x%x\n", err);
+			//clearscr();
+			//printf("Error: 0x%x\n", err);
 			if (procname[0]==TASK1){
 				print_task((task_t *)process[0]);
 				panic("*** General Protection Fault In TASK1***");
 			}
 			else if (procname[0]==TASK2){
 				print_task((task_t *)process[0]);
-				panic("*** General Protection In TASK2***");
+				panic("*** General Protection Fault In TASK2***");
 			}
 			else if (procname[0]==TASK3){
 				print_task((task_t *)process[0]);
-				panic("*** General Protection In TASK2***");
+				panic("*** General Protection Fault In TASK2***");
 			}
 			else{
 				panic("*** General Protection ***");

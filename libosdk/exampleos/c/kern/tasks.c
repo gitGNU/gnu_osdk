@@ -27,8 +27,8 @@ task_t task3;
 unsigned char task1_stack[2000];
 unsigned char task2_stack[2000];
 unsigned char task3_stack[2000];
-unsigned int process[2];
-unsigned int procname[2];
+unsigned int process[3];
+unsigned int procname[3];
 
 void task1_main()
 {

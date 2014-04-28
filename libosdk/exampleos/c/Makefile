@@ -26,7 +26,7 @@ all:
 
 	$(OBJDUMP) -t ckernel > symbols.txt
 	#$(OBJDUMP) -t testmod > testmod_syms.txt
-	$(OBJDUMP) -drS ckernel > disassembly.txt
+	#$(OBJDUMP) -drS ckernel > disassembly.txt
 	#$(OBJDUMP) -drS testmod > testmod_disasm.txt
 	
 clean:

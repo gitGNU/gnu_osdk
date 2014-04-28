@@ -1,0 +1,228 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+U_KERNEL_TASK2_STACK
+                    0x7d0             kernel.o
+U_KERNEL_PROCNAME   0xc               kernel.o
+U_KERNEL_J          0x4               kernel.o
+U_KERNEL_TIMER      0x4               kernel.o
+U_KERNEL_TASK       0x4               kernel.o
+U_KERNEL_TASK1      0x44c             kernel.o
+U_KERNEL_TASK3      0x44c             kernel.o
+U_KERNEL_TASK3_STACK
+                    0x7d0             kernel.o
+U_KERNEL_VGA        0x4               kernel.o
+U_KERNEL_SECONDS    0x4               kernel.o
+U_KERNEL_I          0x4               kernel.o
+U_KERNEL_PROCESS    0xc               kernel.o
+U_KERNEL_TASK2      0x44c             kernel.o
+U_KERNEL_PT         0x4               kernel.o
+U_KERNEL_PD         0x4               kernel.o
+U_KERNEL_TASK1_STACK
+                    0x7d0             kernel.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD ../../i386/libosdk-i386.o
+LOAD kernel.o
+LOAD units/console.o
+LOAD units/multiboot.o
+LOAD units/system.o
+                0x0000000000600000                . = 0x600000
+
+.text           0x0000000000600000     0x8230
+ *(.text)
+ .text          0x0000000000600000     0x7b69 ../../i386/libosdk-i386.o
+                0x0000000000607ac7                osdk_get_cs
+                0x0000000000607acd                osdk_get_cr0
+                0x00000000006076e2                osdk_get_pd
+                0x0000000000607633                osdk_timerhz
+                0x00000000006076b0                osdk_getxy
+                0x000000000060770f                osdk_mem_map
+                0x000000000060791b                osdk_get_cpuid
+                0x0000000000607857                osdk_flush_all
+                0x0000000000607ab7                osdk_get_ss
+                0x0000000000607abd                osdk_get_eflags
+                0x00000000006076ec                osdk_get_pt
+                0x0000000000607aab                osdk_get_tss_ss0
+                0x000000000060776b                osdk_mem_unmap
+                0x00000000006076b2                osdk_get_fault_address
+                0x0000000000607684                osdk_getch
+                0x000000000060780c                osdk_table_unmap
+                0x00000000006079a5                osdk_cmos_write
+                0x000000000060766d                osdk_out
+                0x0000000000607848                osdk_flush
+                0x000000000060765b                osdk_unlock
+                0x00000000006076b1                osdk_reboot
+                0x00000000006075f9                osdk_task_switch
+                0x0000000000607687                osdk_putchar
+                0x0000000000607582                osdk_task_create
+                0x0000000000607ad3                osdk_get_cr4
+                0x0000000000607659                osdk_lock
+                0x00000000006076bc                osdk_enable_paging
+                0x0000000000607973                osdk_cmos_read
+                0x00000000006077ce                osdk_table_map
+                0x00000000006076d5                osdk_set_pd
+                0x0000000000607ac0                osdk_set_tr
+                0x000000000060765d                osdk_in
+                0x00000000006079e3                osdk_get_code_end
+                0x0000000000600000                start
+                0x0000000000607ab1                osdk_get_tss_esp0
+                0x0000000000607aba                osdk_get_esp
+                0x00000000006076af                osdk_setxy
+                0x00000000006079d7                osdk_get_code_start
+ *fill*         0x0000000000607b69        0x7 00
+ .text          0x0000000000607b70      0x430 kernel.o
+                0x0000000000607ea0                KERNEL_ROTATE_QUEUE
+                0x0000000000607f10                KERNEL_BZERO$POINTER$LONGINT
+                0x0000000000607b70                KERNEL_MAIN$LONGWORD$PMULTIBOOT_INFO_T
+                0x0000000000607e80                KERNEL_TASK3_MAIN
+                0x0000000000607dd0                KERNEL_INTERRUPT$LONGINT
+                0x0000000000607e10                task1_main
+                0x0000000000607ef0                KERNEL_SCHEDULAR
+                0x0000000000607e50                KERNEL_TASK2_MAIN
+                0x0000000000607e10                KERNEL_TASK1_MAIN
+                0x0000000000607e80                task3_main
+                0x0000000000607b70                main
+                0x0000000000607dd0                interrupt
+                0x0000000000607e50                task2_main
+                0x0000000000607f50                KERNEL_KPRINTCOUNTER
+ .text          0x0000000000607fa0      0x290 units/console.o
+                0x0000000000608120                CONSOLE_KWRITEINT$LONGINT
+                0x0000000000607fd0                CONSOLE_KWRITECHR$CHAR
+                0x0000000000608210                CONSOLE_KWRITELNSTR$PCHAR
+                0x00000000006081a0                kwritedword
+                0x00000000006081a0                CONSOLE_KWRITEDWORD$LONGWORD
+                0x0000000000607fd0                kwritechr
+                0x0000000000607fa0                CONSOLE_KCLEARSCREEN
+                0x0000000000608060                CONSOLE_KWRITESTR$PCHAR
+                0x0000000000608060                kwritestr
+                0x0000000000607fa0                kclearscreen
+                0x0000000000608120                kwriteint
+
+.rodata
+ *(.rodata)
+
+.data           0x0000000000609000      0x500
+ *(.data)
+ .data          0x0000000000609000       0xcc kernel.o
+                0x00000000006090c8                RTTI__KERNEL_PC
+                0x000000000060902c                _$KERNEL$_L14
+                0x0000000000609098                _$KERNEL$_L174
+                0x0000000000609000                THREADVARLIST_KERNEL
+                0x0000000000609044                _$KERNEL$_L96
+                0x0000000000609014                _$KERNEL$_L11
+                0x0000000000609004                _$KERNEL$_L8
+                0x0000000000609038                _$KERNEL$_L19
+                0x00000000006090b8                _$KERNEL$_L206
+                0x00000000006090a8                _$KERNEL$_L193
+                0x0000000000609074                _$KERNEL$_L115
+                0x0000000000609084                _$KERNEL$_L130
+                0x0000000000609040                _$KERNEL$_L24
+ *fill*         0x00000000006090cc        0x4 00
+ .data          0x00000000006090d0       0x14 units/console.o
+                0x00000000006090d0                TC_CONSOLE_XPOS
+                0x00000000006090e0                THREADVARLIST_CONSOLE
+                0x00000000006090d4                TC_CONSOLE_YPOS
+ *fill*         0x00000000006090e4        0x4 00
+ .data          0x00000000006090e8      0x192 units/multiboot.o
+                0x0000000000609120                RTTI__MULTIBOOT_ELF_SECTION_HEADER_TABLE_T
+                0x0000000000609178                RTTI__MULTIBOOT_MULTIBOOT_INFO_T
+                0x00000000006091e4                RTTI__MULTIBOOT_PMODULE_T
+                0x000000000060910c                _$MULTIBOOT$_L1
+                0x0000000000609164                RTTI__MULTIBOOT_PMULTIBOOT_INFO_T
+                0x0000000000609234                RTTI__MULTIBOOT_MEMORY_MAP_T
+                0x00000000006090ec                RTTI__MULTIBOOT_PELF_SECTION_HEADER_TABLE_T
+                0x00000000006090e8                THREADVARLIST_MULTIBOOT
+                0x00000000006091f0                RTTI__MULTIBOOT_MODULE_T
+                0x0000000000609224                RTTI__MULTIBOOT_PMEMORY_MAP_T
+ *fill*         0x000000000060927a        0x6 00
+ .data          0x0000000000609280      0x280 units/system.o
+                0x00000000006092a4                RTTI__SYSTEM_PCHAR
+                0x0000000000609440                RTTI__SYSTEM_PINT64
+                0x0000000000609330                RTTI__SYSTEM_UCS4STRING
+                0x000000000060942c                RTTI__SYSTEM_PCARDINAL
+                0x000000000060949c                RTTI__SYSTEM_PSHORTSTRING
+                0x0000000000609420                RTTI__SYSTEM_PLONGINT
+                0x00000000006092d4                RTTI__SYSTEM_TUCS4CHARARRAY
+                0x0000000000609280                THREADVARLIST_SYSTEM
+                0x0000000000609484                RTTI__SYSTEM_PWORDBOOL
+                0x00000000006092a0                INIT__SYSTEM_OLEVARIANT
+                0x00000000006094c4                RTTI__SYSTEM_PERROR
+                0x00000000006093ac                RTTI__SYSTEM_PDOUBLE
+                0x00000000006093e4                RTTI__SYSTEM_PSHORTINT
+                0x000000000060929c                INIT__SYSTEM_VARIANT
+                0x0000000000609454                RTTI__SYSTEM_PSIZEINT
+                0x0000000000609354                RTTI__SYSTEM_UTF8STRING
+                0x00000000006094ac                RTTI__SYSTEM_PANSISTRING
+                0x0000000000609290                INIT__SYSTEM_WIDESTRING
+                0x000000000060946c                RTTI__SYSTEM_PPPOINTER
+                0x00000000006093a0                RTTI__SYSTEM_PSINGLE
+                0x00000000006094f4                RTTI__SYSTEM_TPROCEDURE
+                0x0000000000609390                RTTI__SYSTEM_ERROR
+                0x00000000006092ac                RTTI__SYSTEM_PPCHAR
+                0x00000000006093fc                RTTI__SYSTEM_PBYTE
+                0x0000000000609304                _$SYSTEM$_L1
+                0x00000000006094d8                RTTI__SYSTEM_PPWIDECHAR
+                0x000000000060940c                RTTI__SYSTEM_PDWORD
+                0x0000000000609348                INIT__SYSTEM_UTF8STRING
+                0x00000000006094cc                RTTI__SYSTEM_PWIDECHAR
+                0x00000000006093cc                RTTI__SYSTEM_PEXTENDED
+                0x0000000000609360                RTTI__SYSTEM_PUTF8STRING
+                0x0000000000609490                RTTI__SYSTEM_PLONGBOOL
+                0x0000000000609460                RTTI__SYSTEM_PPOINTER
+                0x0000000000609438                RTTI__SYSTEM_PQWORD
+                0x00000000006093b8                RTTI__SYSTEM_PCURRENCY
+                0x0000000000609414                RTTI__SYSTEM_PLONGWORD
+                0x00000000006092c8                RTTI__SYSTEM_PUCS4CHAR
+                0x00000000006092b4                RTTI__SYSTEM_UCS4CHAR
+                0x0000000000609284                INIT__SYSTEM_ANSISTRING
+                0x0000000000609478                RTTI__SYSTEM_PBOOLEAN
+                0x00000000006093f0                RTTI__SYSTEM_PINTEGER
+                0x0000000000609448                RTTI__SYSTEM_PPTRINT
+                0x00000000006094bc                RTTI__SYSTEM_PDATE
+                0x0000000000609384                RTTI__SYSTEM_TDATETIME
+                0x00000000006093d8                RTTI__SYSTEM_PSMALLINT
+                0x00000000006093c4                RTTI__SYSTEM_PCOMP
+                0x00000000006094e4                RTTI__SYSTEM_PWIDESTRING
+                0x00000000006092f4                RTTI__SYSTEM_PUCS4CHARARRAY
+                0x0000000000609370                RTTI__SYSTEM_HRESULT
+                0x0000000000609318                INIT__SYSTEM_UCS4STRING
+                0x0000000000609404                RTTI__SYSTEM_PWORD
+
+.bss            0x0000000000609500    0xfc4b0
+                0x0000000000609500                _sbss = .
+ *(COMMON)
+ COMMON         0x0000000000609500     0x24b0 kernel.o
+                                          0x0 (size before relaxing)
+                0x0000000000609500                U_KERNEL_TASK2_STACK
+                0x0000000000609cd0                U_KERNEL_PROCNAME
+                0x0000000000609cdc                U_KERNEL_J
+                0x0000000000609ce0                U_KERNEL_TIMER
+                0x0000000000609ce4                U_KERNEL_TASK
+                0x0000000000609cf0                U_KERNEL_TASK1
+                0x000000000060a140                U_KERNEL_TASK3
+                0x000000000060a590                U_KERNEL_TASK3_STACK
+                0x000000000060ad60                U_KERNEL_VGA
+                0x000000000060ad64                U_KERNEL_SECONDS
+                0x000000000060ad68                U_KERNEL_I
+                0x000000000060ad70                U_KERNEL_PROCESS
+                0x000000000060ad80                U_KERNEL_TASK2
+                0x000000000060b1cc                U_KERNEL_PT
+                0x000000000060b1d0                U_KERNEL_PD
+                0x000000000060b1e0                U_KERNEL_TASK1_STACK
+ *(.bss)
+ .bss           0x000000000060b9b0    0xfa000 ../../i386/libosdk-i386.o
+                0x00000000007059b0                _ebss = .
+
+.rel.dyn
+OUTPUT(paskernel elf32-i386-freebsd)
+
+.comment        0x0000000000000000       0x1f
+ .comment       0x0000000000000000       0x1f ../../i386/libosdk-i386.o

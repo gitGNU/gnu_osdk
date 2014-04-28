@@ -1,5 +1,9 @@
-LibOSDK-0.1.2:
+LibOSDK-0.2.1:
+1- better exampleOS called "eXOS" with better comments.
+
+LibOSDK-0.2.2:
 1- cpuid & frequency support.
 
-LibOSDK-0.1.3:
+LibOSDK-0.2.3:
 1- solving no tasks while interrupts enabled bug.
+

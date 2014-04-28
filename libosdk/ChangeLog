@@ -1,0 +1,4 @@
+0.2.0:
+	* LibOSDK converted to use GNU as syntax rather than nasm.
+	* Better stable version with some minor bug fixes.
+

@@ -33,8 +33,8 @@ extern task_t task1;
 extern task_t task2;
 extern task_t task3;
 
-extern unsigned int process[2];
-extern unsigned int procname[2];
+extern unsigned int process[3];
+extern unsigned int procname[3];
 
 
 void print_task(task_t *);

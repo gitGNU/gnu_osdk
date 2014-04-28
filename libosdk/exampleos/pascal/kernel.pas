@@ -191,11 +191,14 @@ end;
 procedure task1_main();stdcall; [public, alias: ' task1_main'];
 var
 	x, y : integer;
+	str : string;
 begin
 	x:=1;
 	y:=2;
 	x:=x+1;
 	y:=x+3;
+	str := 'I Love Rana';
+	//kwritelnstr(str);
 	kwritelnstr('Task1 Started.');
 	asm
 		@loop:

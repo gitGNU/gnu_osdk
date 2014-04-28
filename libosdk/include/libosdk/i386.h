@@ -304,28 +304,28 @@ typedef unsigned long dword_t;
 #define IRQ14 0x2e
 
 /* CPU Faults */
-#define _DIV_BY_ZERO 						0x0		/* Division By Zero Exception */
-#define _DEBUG							0x1		/* Debug */
+#define _DIV_BY_ZERO 					0x0		/* Division By Zero Exception */
+#define _DEBUG						0x1		/* Debug */
 #define _NON_MASKABLE_INTERRUPT 			0x2		/* Non Maskable Interrupt */
-#define _BREAK_POINT						0x3		/* Breakpoint */
-#define _INTO_DETECTED_OVERFLAW			0x4		/* Into Detected Overflow */
+#define _BREAK_POINT					0x3		/* Breakpoint */
+#define _INTO_DETECTED_OVERFLAW				0x4		/* Into Detected Overflow */
 #define _OUT_OF_BOUNDS					0x5		/* Out of Bounds */
 #define _INVALID_OPCODE					0x6		/* Invalid Opcode */
 #define _NO_COPROCESSOR					0x7		/* No Coprocessor */
 #define _DOUBLE_FAULT					0x8		/* Double Fault */
-#define _COPROCESSOR_SEGMENT_OVERRUN	0x9		/* Coprocessor Segment Overrun */
-#define _BAD_TSS							0xa		/* Bad TSS */
+#define _COPROCESSOR_SEGMENT_OVERRUN			0x9		/* Coprocessor Segment Overrun */
+#define _BAD_TSS					0xa		/* Bad TSS */
 #define _SEGMENT_NOT_PRESENT				0xb		/* Segment Not Present */
-#define _STACK_FAULT						0xc		/* Stack Fault */
+#define _STACK_FAULT					0xc		/* Stack Fault */
 #define _GENERAL_PROTECTION_FAULT			0xd		/* General Protection Fault */
-#define _PAGE_FAULT						0xe		/* Page Fault */
+#define _PAGE_FAULT					0xe		/* Page Fault */
 #define _UNKNOWN_INTERRUPT				0xf		/* Unknown Interrupt */
 #define _COPROCESSOR_FAULT				0x10		/* Coprocessor Fault */
-#define _ALIGNMENT_CHECK_EXCEPTION		0x11		/* Alignment Check Exception */
+#define _ALIGNMENT_CHECK_EXCEPTION			0x11		/* Alignment Check Exception */
 #define _MACHINE_CHECK					0x12		/* Machine Check */
 
 /* Paging */
-#define	PAGE_PRESENT	0x01
+#define	PAGE_PRESENT		0x01
 #define	PAGE_WRITE		0x02
 #define	PAGE_USER		0x04
 #define	PAGE_DIRTY		0x20
@@ -378,38 +378,38 @@ typedef struct cpuid_s{
 typedef struct cmos_s{
 	byte_t seconds;			/* 0x00*/			/* Seconds */
 	byte_t seconds_alarm;		/* 0x01*/			/* Seconds (alarm) */
-	byte_t minutes;				/* 0x02 */			/* Minutes */
+	byte_t minutes;			/* 0x02 */			/* Minutes */
 	byte_t minutes_alarm;		/* 0x03 */			/* Minutes (alarm) */
-	byte_t hours;				/* 0x04 */			/* Hours */
-	byte_t hours_alarm;			/* 0x05 */			/* Hours (alarm) */
-	byte_t day_of_week;			/* 0x06 */			/* Day of week */
+	byte_t hours;			/* 0x04 */			/* Hours */
+	byte_t hours_alarm;		/* 0x05 */			/* Hours (alarm) */
+	byte_t day_of_week;		/* 0x06 */			/* Day of week */
 	byte_t day_of_month;		/* 0x07 */			/* Day of month */
-	byte_t month;				/* 0x08 */			/* Month */
-	byte_t year;				/* 0x09 */			/* Year */
-	byte_t a;					/* 0x0a*/			/* Status register A */
-	byte_t b;					/* 0x0b */			/* Status register B */
-	byte_t c;					/* 0x0c */			/* Status register C */
-	byte_t d;					/* 0x0d */			/* Status register D */
-	byte_t diagnosis;			/* 0x0e */			/* Diagnosis register */
-	byte_t shutdown;			/* 0x0f */			/* Shutdown status */
-	byte_t floppy;				/* 0x10 */			/* Floppy types */
-	byte_t reserved0;			/* 0x11 */			/* Reserved */
-	byte_t harddisk;			/* 0x12 */			/* Hard drive types */
-	byte_t reserved1;			/* 0x13 */			/* Reserved */
-	byte_t device;				/* 0x14 */			/* Device byte */
-	word_t base_mem;			/* 0x15 - 0x16 */	/* Base memory */
-	word_t ext_mem;			/* 0x17 - 0x18*/	/* Extended memory */
-	byte_t hdd1_ext;			/* 0x19 */			/* Extension for first HDD */
-	byte_t hdd2_ext;			/* 0x1a */			/* Extension for second HDD */
-	byte_t reserved2[5];			/* 0x1b - 0x1f */	/* Reserved */
-	byte_t hdd1_param[8];		/* 0x20 - 0x27 */ 	/* HDD one parameters */
-	byte_t reserved3[6];			/* 0x28 - 0x2d */	/* Reserved */
-	word_t checksum;			/* 0x2e - 0x2f */	/* Checksum */
-	word_t post_ext_mem;		/* 0x30 - 0x31 */	/* Post extended memory */
-	byte_t century;				/* 0x32 */			/* Century */
-	word_t setup_info;			/* 0x33 - 0x34*/	/* Setup Information */
+	byte_t month;			/* 0x08 */			/* Month */
+	byte_t year;			/* 0x09 */			/* Year */
+	byte_t a;			/* 0x0a*/			/* Status register A */
+	byte_t b;			/* 0x0b */			/* Status register B */
+	byte_t c;			/* 0x0c */			/* Status register C */
+	byte_t d;			/* 0x0d */			/* Status register D */
+	byte_t diagnosis;		/* 0x0e */			/* Diagnosis register */
+	byte_t shutdown;		/* 0x0f */			/* Shutdown status */
+	byte_t floppy;			/* 0x10 */			/* Floppy types */
+	byte_t reserved0;		/* 0x11 */			/* Reserved */
+	byte_t harddisk;		/* 0x12 */			/* Hard drive types */
+	byte_t reserved1;		/* 0x13 */			/* Reserved */
+	byte_t device;			/* 0x14 */			/* Device byte */
+	word_t base_mem;		/* 0x15 - 0x16 */		/* Base memory */
+	word_t ext_mem;			/* 0x17 - 0x18*/		/* Extended memory */
+	byte_t hdd1_ext;		/* 0x19 */			/* Extension for first HDD */
+	byte_t hdd2_ext;		/* 0x1a */			/* Extension for second HDD */
+	byte_t reserved2[5];		/* 0x1b - 0x1f */		/* Reserved */
+	byte_t hdd1_param[8];		/* 0x20 - 0x27 */ 		/* HDD one parameters */
+	byte_t reserved3[6];		/* 0x28 - 0x2d */		/* Reserved */
+	word_t checksum;		/* 0x2e - 0x2f */		/* Checksum */
+	word_t post_ext_mem;		/* 0x30 - 0x31 */		/* Post extended memory */
+	byte_t century;			/* 0x32 */			/* Century */
+	word_t setup_info;		/* 0x33 - 0x34*/		/* Setup Information */
 	byte_t hdd2_param[8];		/* 0x35 */			/* HDD two parameters */
-	byte_t reserved4[3];			/* 0x3d - 0x3f */	/* Reserved */
+	byte_t reserved4[3];		/* 0x3d - 0x3f */		/* Reserved */
 }__attribute__((packed)) cmos_t;
 
 /* Function Prototyping */

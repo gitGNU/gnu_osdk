@@ -12,7 +12,7 @@ ld -e start -Ttext 0x100000 libosdk-i386 kernel.o -o kernel
 assuming that kernel.o is your kernel
 
 Notice:
-When linking libosdk with your kernel the entry much point to libosdk start function.
+When linking libosdk with your kernel the entry must point to libosdk start function.
 libosdk produces multiboot kernel which you can easily boot using grub or any other
 boot loader that support multiboot specifications.
 
