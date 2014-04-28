@@ -26,3 +26,8 @@ title kernel
 
 where x = y - 1, y is the partition containing your unix system.
 remember grub start counting from zero not 1 as linux does.
+
+
+For more information about osdk internals and how to use it consult the osdk's wiki:
+http://libosdk.berlios.de/wiki/
+http://libosdk.berlios.de/

@@ -26,6 +26,10 @@ extern interrupt
 extern pic_irq
 extern sys_call
 
+STACKSIZE		equ		1024000
+PAGEDIRSIZE		equ		1024*4
+PAGETABLESIZE	equ		1024*4*1024
+
 section .text
 
 start:
@@ -51,11 +55,16 @@ osdk_main:
 	mov	esp, (STACK+STACKSIZE-1)
 	push	dword eax
 	push	dword ebx
-	call	set_gdt
-	call	set_isr
-	call	set_idt
+	call	init_gdt
+	call	init_isr
+	call	init_idt
 	call	remap_pic
-	call	set_tr
+	call	init_tr
+	;mov	eax, PAGEDIR
+	;call	set_cr3
+	;call	enable_paging
+	call	init_cpuid
+	call	get_cpu_speed
 	pop	dword ebx
 	pop	dword eax
 	push	dword ebx
@@ -67,14 +76,6 @@ osdk_main:
 	cli
 	hlt
 
-osdk_lock:
-	cli
-	ret
-
-osdk_unlock:
-	sti
-	ret
-
 
 %include 'isr.asm'
 %include 'idt.asm'
@@ -82,12 +83,15 @@ osdk_unlock:
 %include 'tss.asm'
 %include 'pic.asm'
 %include 'pit.asm'
-%include 'debug.asm'
+%include 'interrupt.asm'
 %include 'ports.asm'
 %include 'drivers.asm'
+%include 'paging.asm'
+%include 'cpuid.asm'
+%include 'cmos.asm'
+%include 'debug.asm'
 
 section .bss
 	align 32
-STACKSIZE		equ		1024000
 STACK			resb		STACKSIZE		; reserve 128k stack on a quadword boundary
 

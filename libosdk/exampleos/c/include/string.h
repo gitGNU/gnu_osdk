@@ -24,7 +24,8 @@
 #define OCT 8
 #define BIN 2
 
-void itoa(int, int, char *);
+void itoa(int, unsigned int, char *);
+void uitoa(unsigned int, unsigned int, char *);
 char hexdigit(int);
 int abs(int);
 void printf(char *, ...);

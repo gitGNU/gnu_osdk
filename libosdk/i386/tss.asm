@@ -19,9 +19,6 @@ bits 32
 
 global osdk_task_create
 global osdk_task_switch
-global task
-global ksize
-global rsize
 
 align	4
 
@@ -69,7 +66,7 @@ tss:
 			dw	0h
 	iobitmap	dw	0h
 
-set_tr:
+init_tr:
 	push	eax
 	push	ecx
 	mov	ecx, tss

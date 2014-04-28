@@ -17,6 +17,7 @@
 
 bits 32
 
+init_pic:
 remap_pic:
 	push	eax
 	

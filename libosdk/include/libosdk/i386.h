@@ -19,22 +19,13 @@
 #ifndef _i386_H
 #define _i386_H
 
-/* Boolean definations */
-#define TRUE	1
-#define FALSE	0
-
-/* NULL pointer */
-#ifndef NULL
-	#define NULL	((void *)0)
-#endif
-
 /* Bytes, Word, Double Words*/
 typedef unsigned char byte_t;
 typedef unsigned short word_t;
 typedef unsigned long dword_t;
 
-#ifndef _MAX_KSTACK
-	#define _MAX_KSTACK	1024
+#ifndef _KSTACK_SIZE_
+	#define _KSTACK_SIZE_	1024
 #endif
 
 /* Interrupts */
@@ -358,18 +349,74 @@ typedef struct regs_s{
 	dword_t ss3;
 }__attribute__((packed)) regs_t;
 
+
 /* Per-Process Kernel Stack */
 
 typedef struct task_s{
-	char stack[_MAX_KSTACK] ;
+	char stack[_KSTACK_SIZE_] ;
 	regs_t regs;
 }__attribute__((packed)) task_t;
-	
+
+
+/* CPUID structure */
+
+typedef struct cpuid_s{
+	char	vendor[13];
+	dword_t flags[4];
+	dword_t serial[4];
+	dword_t speed;
+}__attribute__((packed)) cpuid_t;
+
+/* CMOS Structure */
+
+typedef struct cmos_s{
+	byte_t seconds;			/* 0x00*/			/* Seconds */
+	byte_t seconds_alarm;		/* 0x01*/			/* Seconds (alarm) */
+	byte_t minutes;				/* 0x02 */			/* Minutes */
+	byte_t minutes_alarm;		/* 0x03 */			/* Minutes (alarm) */
+	byte_t hours;				/* 0x04 */			/* Hours */
+	byte_t hours_alarm;			/* 0x05 */			/* Hours (alarm) */
+	byte_t day_of_week;			/* 0x06 */			/* Day of week */
+	byte_t day_of_month;		/* 0x07 */			/* Day of month */
+	byte_t month;				/* 0x08 */			/* Month */
+	byte_t year;				/* 0x09 */			/* Year */
+	byte_t a;					/* 0x0a*/			/* Status register A */
+	byte_t b;					/* 0x0b */			/* Status register B */
+	byte_t c;					/* 0x0c */			/* Status register C */
+	byte_t d;					/* 0x0d */			/* Status register D */
+	byte_t diagnosis;			/* 0x0e */			/* Diagnosis register */
+	byte_t shutdown;			/* 0x0f */			/* Shutdown status */
+	byte_t floppy;				/* 0x10 */			/* Floppy types */
+	byte_t reserved0;			/* 0x11 */			/* Reserved */
+	byte_t harddisk;			/* 0x12 */			/* Hard drive types */
+	byte_t reserved1;			/* 0x13 */			/* Reserved */
+	byte_t device;				/* 0x14 */			/* Device byte */
+	word_t base_mem;			/* 0x15 - 0x16 */	/* Base memory */
+	word_t ext_mem;			/* 0x17 - 0x18*/	/* Extended memory */
+	byte_t hdd1_ext;			/* 0x19 */			/* Extension for first HDD */
+	byte_t hdd2_ext;			/* 0x1a */			/* Extension for second HDD */
+	byte_t reserved2[5];			/* 0x1b - 0x1f */	/* Reserved */
+	byte_t hdd1_param[8];		/* 0x20 - 0x27 */ 	/* HDD one parameters */
+	byte_t reserved3[6];			/* 0x28 - 0x2d */	/* Reserved */
+	word_t checksum;			/* 0x2e - 0x2f */	/* Checksum */
+	word_t post_ext_mem;		/* 0x30 - 0x31 */	/* Post extended memory */
+	byte_t century;				/* 0x32 */			/* Century */
+	word_t setup_info;			/* 0x33 - 0x34*/	/* Setup Information */
+	byte_t hdd2_param[8];		/* 0x35 */			/* HDD two parameters */
+	byte_t reserved4[3];			/* 0x3d - 0x3f */	/* Reserved */
+}__attribute__((packed)) cmos_t;
 
 /* Function Prototyping */
 
+/* CPUID */
+void osdk_get_cpuid(cpuid_t *);
+
+/* CMOS */
+void osdk_cmos_read(cmos_t *);
+void osdk_cmos_write(cmos_t *);
+
 /* Tasks */
-dword_t osdk_task_create(task_t*, void (*)(), unsigned char*);
+void osdk_task_create(task_t*, void (*)(), unsigned char*);
 void osdk_task_switch(task_t*);
 
 /* I/O Ports */

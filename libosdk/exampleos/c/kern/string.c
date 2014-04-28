@@ -19,26 +19,55 @@
 #include <string.h>
 #include <console.h>
 
-void itoa(int num, int base, char *buffer)
+void itoa(int num, unsigned int base, char *buffer)
 {
-	int r=0,i=9;
-	int tmp[30];
-	if(num < 0)
+	unsigned int r=0;
+	int i=0;
+	char tmp[32];
+	if(num<0)
 		*buffer++='-';
 	num=abs(num);
-	if(num < base)
-		*buffer++=hexdigit(num);	
+	if(num < base){
+		*buffer++=hexdigit(num);
+		*buffer='\0';
+		return;
+	}
 	if(num >= base)
 		while(num)
 		{
 			r=num % base;
 			num /= base;
-			tmp[i--]=hexdigit(r);	
+			tmp[i++]=hexdigit(r);	
 		}
-	for(i++ ; i < 10 ; i++)
+	i--;
+	for( ; i>=0 ; i--)
 		*buffer++=tmp[i];
 	*buffer='\0';
 }
+
+void uitoa(unsigned int num, unsigned int base, char *buffer)
+{
+	unsigned int r=0;
+	int i=0;
+	char tmp[32];
+	if(num < base){
+		*buffer++=hexdigit(num);
+		*buffer='\0';
+		return;
+	}
+	if(num >= base)
+		while(num)
+		{
+			r=num % base;
+			num /= base;
+			tmp[i++]=hexdigit(r);	
+		}
+	i--;
+	for( ; i>=0 ; i--)
+		*buffer++=tmp[i];
+	*buffer='\0';
+}
+
 
 char hexdigit(int n)
 {
@@ -104,7 +133,7 @@ void printf(char *fmt, ...)
 						puts(buffer);
 						break;
 					case 'x':
-						itoa(__builtin_va_arg(va ,int), HEX, buffer);
+						uitoa(__builtin_va_arg(va ,unsigned int), HEX, buffer);
 						puts(buffer);
 						break;
 					case 's':

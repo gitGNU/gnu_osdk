@@ -74,7 +74,7 @@ set_idesc3:
 	pop	eax
 	ret
 
-set_idt:
+init_idt:
 	lidt	[idt_info]
 	ret
 	

@@ -17,7 +17,7 @@
 
 bits 32
 
-set_isr:
+init_isr:
 	push	ebx
 	push	ecx
 

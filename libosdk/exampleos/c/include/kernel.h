@@ -26,9 +26,15 @@ int main(unsigned int, multiboot_info_t *);
 
 void interrupt(int, int);
 void schedular(void);
+void syscall(void);
 void rotate_queue(void);
 
 void panic(char *);
 void kprintcounter(void);
 
+void print_cpu_info(void);
+void print_modules_info(void);
+void load_modules(void);
+
+unsigned int bcd2bin(unsigned int);
 #endif

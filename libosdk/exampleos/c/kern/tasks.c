@@ -70,8 +70,8 @@ void task2_main()
 
 	printf("Task2 Started.\n");
 	
-	//asm("int $0x80");
-	//asm("cli");
+	asm("movl $0x0 , %eax");
+	asm("int $0x80");
 
 /*
 	while(1)
@@ -96,7 +96,14 @@ void task2_main()
 
 void task3_main()
 {
+	int x=0;
 	printf("Task3 Started.\n");
+	asm("movl $0x1 , %eax");
+	asm("movl $0x2 , %ebx");
+	asm("movl $0x3 , %ecx");
+	asm("int $0x80");
+	asm ("movl %%eax, %0" : : "m"(x));
+	printf("ret=%d\n", x);
 	for(;;);
 }
 

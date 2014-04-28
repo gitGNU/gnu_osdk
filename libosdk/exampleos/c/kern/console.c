@@ -17,8 +17,10 @@
 */
 
 #include <console.h>
+#include <libosdk/i386.h>
 
 unsigned char *video = (unsigned char *) VIDEO;
+unsigned int keybstat=0;
 
 pos_t pos;
 
@@ -108,4 +110,19 @@ void clearscr(void)
 	}
 	pos.x=0;
 	pos.y=0;
+}
+
+int keyb_busy()
+{
+	if(osdk_in(0x64) & 0x2)
+		return 1;
+	else return 0;
+}
+
+void keyb_led(byte_t stat)
+{
+	while(keyb_busy());
+	osdk_out(0x60, 0xed);
+	while(keyb_busy());
+	osdk_out(0x60, stat);
 }
