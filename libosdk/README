@@ -1,0 +1,28 @@
+OSDK- Operating Systems Development Kit
+---------------------------------------
+
+you can easily build osdk
+just type:
+#make clean
+#make
+this will produce libosdk library which you can link it easily
+to your kernel
+just add the following line to your kernel Makefile
+ld -e start -Ttext 0x100000 libosdk kernel.o -o kernel
+assuming that kernel.o is your kernel
+
+Notice:
+When linking libosdk with your kernel the entry much point to libosdk start function.
+libosdk produces multiboot kernel which you can easily boot using grub or any other
+boot loader that support multiboot specifications.
+
+After compiling libosdk a sample kernel found in exampleos/ will be compiled for you.
+you just copy the file kernel inside exampleos/ to your /boot/ directory and add entry
+to grub menu.lst found at /boot/grub/menu.lst as follows:
+
+title kernel
+ root (hd0,x)
+ kernel /boot/kernel root=/dev/hday
+
+where x = y - 1, y is the partition containing your unix system.
+remember grub start counting from zero not 1 as linux does.
