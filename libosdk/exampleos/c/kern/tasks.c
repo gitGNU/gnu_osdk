@@ -57,7 +57,6 @@ void task1_main()
 		}
 	}
 */
-
 	for(;;);
 }
 

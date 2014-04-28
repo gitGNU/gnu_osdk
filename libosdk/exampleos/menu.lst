@@ -1,0 +1,12 @@
+default 0
+timeout 30
+
+# C Kernel
+title CKernel
+root (fd0)
+kernel /boot/ckernel
+
+# Pas Kernel
+title PasKernel
+root (fd0)
+kernel /boot/paskernel

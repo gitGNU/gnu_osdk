@@ -16,8 +16,8 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef _i386_H
-#define _i386_H
+#ifndef _LIBOSDK_i386
+#define _LIBOSDK_i386
 
 /* Bytes, Word, Double Words*/
 typedef unsigned char byte_t;
@@ -312,7 +312,7 @@ typedef unsigned long dword_t;
 #define _OUT_OF_BOUNDS					0x5		/* Out of Bounds */
 #define _INVALID_OPCODE					0x6		/* Invalid Opcode */
 #define _NO_COPROCESSOR					0x7		/* No Coprocessor */
-#define _DOUBLE_FAULT						0x8		/* Double Fault */
+#define _DOUBLE_FAULT					0x8		/* Double Fault */
 #define _COPROCESSOR_SEGMENT_OVERRUN	0x9		/* Coprocessor Segment Overrun */
 #define _BAD_TSS							0xa		/* Bad TSS */
 #define _SEGMENT_NOT_PRESENT				0xb		/* Segment Not Present */
@@ -323,6 +323,12 @@ typedef unsigned long dword_t;
 #define _COPROCESSOR_FAULT				0x10		/* Coprocessor Fault */
 #define _ALIGNMENT_CHECK_EXCEPTION		0x11		/* Alignment Check Exception */
 #define _MACHINE_CHECK					0x12		/* Machine Check */
+
+/* Paging */
+#define	PAGE_PRESENT	0x01
+#define	PAGE_WRITE		0x02
+#define	PAGE_USER		0x04
+#define	PAGE_DIRTY		0x20
 
 
 /* Registers */
@@ -435,5 +441,21 @@ unsigned char osdk_getch(void);
 
 /* VGA */
 void osdk_putchar(char, char, unsigned int);
+
+/* Memory */
+unsigned int osdk_get_fault_address(void);
+void osdk_enable_paging(void);
+unsigned int osdk_set_pd(void *);
+unsigned int osdk_get_pd(void);
+unsigned int osdk_get_pt(long);
+unsigned int osdk_mem_map(void *, long, long, long);
+unsigned int osdk_mem_unmap(void *, long);
+unsigned int osdk_table_map(void *, long, void *, long);
+unsigned int osdk_table_unmap(void *, long);
+void osdk_flush(void *);
+void osdk_flush_all(void);
+
+unsigned int osdk_get_code_start(void);
+unsigned int osdk_get_code_end(void);
 
 #endif

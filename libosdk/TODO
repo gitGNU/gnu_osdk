@@ -1,9 +1,3 @@
-LibOSDK-0.1.0:
-1- CMOS read & write support.
-
-LibOSDK-0.1.1:
-1- paging support.
-
 LibOSDK-0.1.2:
 1- cpuid & frequency support.
 

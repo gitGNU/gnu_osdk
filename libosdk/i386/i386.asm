@@ -27,27 +27,31 @@ extern pic_irq
 extern sys_call
 
 STACKSIZE		equ		1024000
-PAGEDIRSIZE		equ		1024*4
-PAGETABLESIZE	equ		1024*4*1024
+PDSIZE			equ		1024*4
+PTSIZE			equ		1024*4
+PTNUM			equ		1024
 
 section .text
 
+code_start:
 start:
 	jmp osdk_main				; Call The osdk_main Function
 	align 4
 
 	mb_magic			dd 0x1BADB002					; Required
-	mb_flags			dd 0x00000003					; Required
-	mb_checksum		dd -(0x1BADB002+0x00000003)		; Required
-	mb_header_addr	dd 0x0							; if flag 16 is set
-	mb_load_addr		dd 0x0							; if flag 16 is set
-	mb_load_end_addr	dd 0x0							; if flag 16 is set
-	mb_bss_end_addr	dd 0x0							; if flag 16 is set
+	mb_flags				dd 0x00000003					; Required
+	mb_checksum			dd -(0x1BADB002+0x00000003)		; Required
+	mb_header_addr		dd 0x0							; if flag 16 is set
+	mb_load_addr			dd 0x0							; if flag 16 is set
+	mb_load_end_addr		dd 0x0							; if flag 16 is set
+	mb_bss_end_addr		dd 0x0							; if flag 16 is set
 	mb_entry_addr		dd 0x0							; if flag 16 is set
 	mb_mode_type		dd 0x0							; if flag 2 is set
 	mb_width 			dd 0x0							; if flag 2 is set
-	mb_height		dd 0x0							; if flag 2 is set
+	mb_height			dd 0x0							; if flag 2 is set
 	mb_depth			dd 0x0							; if flag 2 is set
+
+align 4096
 
 osdk_main:
 	push	 dword 00h
@@ -60,9 +64,6 @@ osdk_main:
 	call	init_idt
 	call	remap_pic
 	call	init_tr
-	;mov	eax, PAGEDIR
-	;call	set_cr3
-	;call	enable_paging
 	call	init_cpuid
 	call	get_cpu_speed
 	pop	dword ebx
@@ -90,8 +91,11 @@ osdk_main:
 %include 'cpuid.asm'
 %include 'cmos.asm'
 %include 'debug.asm'
+%include 'utility.asm'
+
+code_end:
 
 section .bss
 	align 32
-STACK			resb		STACKSIZE		; reserve 128k stack on a quadword boundary
+STACK			resb		STACKSIZE			; reserve 128k stack on a quadword boundary
 

@@ -23,6 +23,7 @@
 #include <console.h>
 #include <tasks.h>
 #include <grub.h>
+#include <mem.h>
 
 unsigned int timer=0;
 unsigned int seconds=0;
@@ -32,6 +33,9 @@ cmos_t cmos;
 unsigned int second, minute, hour;
 unsigned int alarm_second, alarm_minute, alarm_hour;
 unsigned int dayofweek, dayofmonth, month, year, century;
+
+unsigned int *PD;
+unsigned int *PT;
 
 int main(unsigned int magic, multiboot_info_t *mbi)
 {
@@ -46,9 +50,11 @@ int main(unsigned int magic, multiboot_info_t *mbi)
 	clearscr();
 
 	/* Print the header */
-	printf("LibOSDK-0.0.4alpha\n====================\n");
+	printf("LibOSDK-0.1.1\n====================\n");
 	printf("Press h to display help\n");
 	printf("CMOS Size: %d\n", sizeof(cmos_t));
+
+	printf("OSDK Code 0x%x -> 0x%x\n", osdk_get_code_start(), osdk_get_code_end());
 
 	/* Load Modules */
 	load_modules();
@@ -67,6 +73,84 @@ int main(unsigned int magic, multiboot_info_t *mbi)
 	procname[2]=TASK3;
 	task=NONE;
 
+	PD = (unsigned int *)  0x100000;
+	PT = (unsigned int *) 0x101000;
+
+	bzero(PD, 4096);
+	
+	unsigned int i;
+	for(i=0 ; i<0x1000000 ; i+=0x1000)
+	{
+		if(!(osdk_mem_map(PD, i, i, PAGE_WRITE | PAGE_USER | PAGE_PRESENT)))
+		{
+			if(!osdk_table_map(PD, i, PT, PAGE_WRITE | PAGE_USER | PAGE_PRESENT))
+			{
+				printf("ERROR Table Already Mapped Please Unmap First 0x%x\n", PT);
+			}
+			PT += 0x400;
+			if(!(osdk_mem_map(PD, i, i, PAGE_WRITE | PAGE_USER | PAGE_PRESENT)))
+			{
+				printf("ERROR Mapping 0x%x To 0x%x\n", i, i);
+				panic("");
+			}
+			osdk_flush(i);
+		}
+	}
+	PT = (unsigned int *) 0x101000;
+	osdk_set_pd(PD);
+
+	printf("Page DIR 0x%x | 0x%x\n", PD, osdk_get_pd());
+	printf("Page Table#0 0x%x | 0x%x\n", (unsigned int)PT, osdk_get_pt(0));
+	printf("Page Table#1 0x%x | 0x%x\n", (unsigned int)(PT)+0x1000, osdk_get_pt(1));
+	printf("Page Table#2 0x%x | 0x%x\n", (unsigned int)(PT)+0x2000, osdk_get_pt(2));
+
+	printf("[PD]#0 0x%x\n", *PD); 
+	PD++;
+	printf("[PD]#1 0x%x\n", *PD); 
+	PD++;
+	printf("[PD]#2 0x%x\n", *PD); 
+
+	printf("[PT]#0 0x%x\n", *PT); 
+	PT++;
+	printf("[PT]#1 0x%x\n", *PT); 
+	PT++;
+	printf("[PT]#2 0x%x\n", *PT); 
+
+	/* Enable Paging */
+	printf("\nEnabling paging...\n\n");
+	osdk_enable_paging();
+	osdk_flush_all();
+/*
+	// Testing
+	PD = (unsigned int *)  0x100000;
+	if(!(osdk_mem_map(PD, 0xC0000000, 0x900000, PAGE_WRITE | PAGE_USER | PAGE_PRESENT)))
+	{
+		if(!osdk_table_map(PD, 0xC0000000, 0x920000, PAGE_WRITE | PAGE_USER | PAGE_PRESENT))
+		{
+			printf("ERROR Table already mapped please unmap 0x%x\n", 0x920000);
+		}
+		if(!(osdk_mem_map(PD, 0xC0000000, 0x900000, PAGE_WRITE | PAGE_USER | PAGE_PRESENT)))
+		{
+			printf("ERROR Mapping 0x%x To 0x%x\n", 0xC0000000, 0x900000);
+			panic("");
+		}
+	}
+	//osdk_flush(0xC0000000);
+	//osdk_flush_all();
+	//if(!osdk_mem_unmap(PD, 0xC0000000))
+	//	printf("ERROR Unmapping 0x%x\n", 0xC0000000);
+	//osdk_flush(0xC0000000);
+	//osdk_flush_all();
+	//osdk_table_unmap(PD, 0xC0000000);
+	//if(!osdk_mem_unmap(PD, 0xC0000000))
+		//printf("ERROR Unmapping 0x%x\n", 0xC0000000);
+	//osdk_flush(0xC0000000);
+	//osdk_flush_all();
+	//if(!osdk_table_unmap(PD, 0xC0000000))
+		//printf("ERROR Unmapping PT 0x%x\n", 0xC0000000);
+	//unsigned int *x =(unsigned int *) 0xC0000000;
+	//*x=10;
+*/
 	/* Set the timer frequency */
 	osdk_timerhz(100);
 
@@ -159,6 +243,7 @@ void interrupt(int num, int err)
 			break;
 		case INT14:
 			printf("Error: 0x%x\n", err);
+			printf("Page Fault (CR2) = 0x%x\n", osdk_get_fault_address());
 			panic("*** Page Fault ***");
 			break;
 		case INT15:
@@ -182,6 +267,7 @@ void interrupt(int num, int err)
 				kprintcounter();
 			}
 			break;
+
 		case INT33:
 			key=osdk_getch();
 			switch(key){
