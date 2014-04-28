@@ -22,33 +22,54 @@
 #include <string.h>
 #include <console.h>
 #include <tasks.h>
+#include <grub.h>
 
 unsigned int timer=0;
 unsigned int seconds=0;
 
 int main(unsigned int magic, multiboot_info_t *mbi)
 {
+	/* Save the pointer into global multiboot structures */
+	magic_global=magic;
+	mbi_global=mbi;
+
+	/* Clears the screen */
 	clearscr();
-	printf("LibOSDK-0.0.2\n====================\n");
-	printf("Magic = %h\n", magic);
-	print_multiboot_info(magic, mbi);
-	task1_esp=osdk_create_task(&task1_kstack[2000],(char *)task1,&task1_ustack[2000]);
-	task2_esp=osdk_create_task(&task2_kstack[2000],(char *)task2,&task2_ustack[2000]);
-	task3_esp=osdk_create_task(&task3_kstack[2000],(char *)task3,&task3_ustack[2000]);
-	process[0]=task1_esp;
-	process[1]=task2_esp;
-	process[2]=task3_esp;
+
+	/* Print the header */
+	printf("LibOSDK-0.0.3\n====================\n");
+	printf("Click b to display multiboot information\n");
+	printf("Click m to display memory map\n");
+	printf("Click t to display current task information\n");
+
+
+	/* Simple Tasks */	
+	osdk_task_create(&task1, task1_main, &task1_stack[2000]);
+	osdk_task_create(&task2, task2_main, &task2_stack[2000]);
+	osdk_task_create(&task3, task3_main, &task3_stack[2000]);
+
+	process[0]=(unsigned int)&task1;
+	process[1]=(unsigned int)&task2;
+	process[2]=(unsigned int)&task3;
+
 	procname[0]=TASK1;
 	procname[1]=TASK2;
 	procname[2]=TASK3;
 	task=NONE;
+
+	/* Set the timer frequency */
 	osdk_timerhz(100);
+
+	/* Unlock interrrupts */
 	osdk_unlock();
+
+	/* Forever loop */
 	for(;;);
  }
 
 void interrupt(int num, int err)
 {
+	int key;
 	switch(num)
 	{
 		case INT0:
@@ -76,80 +97,58 @@ void interrupt(int num, int err)
 			panic("*** No Coprocessor ***");
 			break;
 		case INT8:
-			printf("Error: %h ", err);
+			printf("Error: 0x%x\n", err);
 			panic("*** Double Fault ***");
 			break;
 		case INT9:
 			panic("*** Coprocessor Segment Overrun ***");
 			break;
 		case INT10:
-			printf("Error: %h ", err);
+			printf("Error: 0x%x\n", err);
 			panic("*** Bad TSS ***");
 			break;
 		case INT11:
-			printf("Error: %h ", err);
+			printf("Error: 0x%x\n", err);
 			panic("*** Segment Not Present ***");
 			break;
 		case INT12:
-			printf("Error: %h ", err);
+			printf("Error: 0x%x\n", err);
 			if (procname[0]==TASK1){
-				//printf("\neflags= %h", ((task_t *)task1_esp)->eflags);
-				printf("\nCR0= %h", osdk_get_cr0());
-				printf("\nCR4= %h\n", osdk_get_cr4());
-				print_task((task_t *)&task1_esp);
+				print_task((task_t *)process[0]);
 				panic("*** Stack Fault In TASK1***");
 			}
 			else if (procname[0]==TASK2){
-				//printf("\neflags= %h", ((task_t *)task2_esp)->eflags);
-				printf("\nCR0= %h", osdk_get_cr0());
-				printf("\nCR4= %h\n", osdk_get_cr4());
-				print_task((task_t *)&task2_esp);
+				print_task((task_t *)process[0]);
 				panic("*** Stack Fault In TASK2***");
 			}
 			else if (procname[0]==TASK3){
-				//printf("\neflags= %h", ((task_t *)task3_esp)->eflags);
-				printf("\nCR0= %h", osdk_get_cr0());
-				printf("\nCR4= %h\n", osdk_get_cr4());
-				//print_task((task_t *)&task3_esp);
+				print_task((task_t *)process[0]);
 				panic("*** Stack Fault In TASK3***");
 			}
 			else{
-				printf("\nCR0= %h", osdk_get_cr0());
-				printf("\nCR4= %h\n", osdk_get_cr4());
 				panic("*** Stack Fault ***");
 			}
 			break;
 		case INT13:
-			printf("Error: %h ", err);
+			printf("Error: 0x%x\n", err);
 			if (procname[0]==TASK1){
-				//printf("\neflags= %h", ((task_t *)task1_esp)->eflags);
-				printf("\nCR0= %h", osdk_get_cr0());
-				printf("\nCR4= %h\n", osdk_get_cr4());
-				print_task((task_t *)&task1_esp);
+				print_task((task_t *)process[0]);
 				panic("*** General Protection Fault In TASK1***");
 			}
 			else if (procname[0]==TASK2){
-				//printf("\neflags= %h", ((task_t *)task2_esp)->eflags);
-				printf("\nCR0= %h", osdk_get_cr0());
-				printf("\nCR4= %h\n", osdk_get_cr4());
-				print_task((task_t *)&task2_esp);
+				print_task((task_t *)process[0]);
 				panic("*** General Protection In TASK2***");
 			}
 			else if (procname[0]==TASK3){
-				//printf("\neflags= %h", ((task_t *)task3_esp)->eflags);
-				printf("\nCR0= %h", osdk_get_cr0());
-				printf("\nCR4= %h\n", osdk_get_cr4());
-				//print_task((task_t *)&task3_esp);
+				print_task((task_t *)process[0]);
 				panic("*** General Protection In TASK2***");
 			}
 			else{
-				printf("\nCR0= %h", osdk_get_cr0());
-				printf("\nCR4= %h\n", osdk_get_cr4());
 				panic("*** General Protection ***");
 			}
 			break;
 		case INT14:
-			printf("Error: %h ", err);
+			printf("Error: 0x%x\n", err);
 			panic("*** Page Fault ***");
 			break;
 		case INT15:
@@ -164,17 +163,6 @@ void interrupt(int num, int err)
 		case INT18:
 			panic("*** Machine Check ***");
 			break;
-		default:
-			panic("*** Reserved Exceptions ***");
-			break;
-	}
-}
-
-int pic_irq(int num)
-{
-	int key;
-	switch(num)
-	{
 		case INT32:
 			timer++;
 			if(timer % 100 == 0)
@@ -182,59 +170,43 @@ int pic_irq(int num)
 				seconds++;
 				kprintcounter();
 			}
-			return schedular();
+			schedular();
 			break;
 
 		case INT33:
 			key=osdk_getch();
 			putchar(kbdus[key]);
+			switch(kbdus[key]){
+			case 't':
+				clearscr();
+				printf("Current task: Task%d\n", procname[0]);
+				print_task((task_t *)process[0]);
+				break;
+			case 'b':
+				clearscr();
+				print_multiboot_info(magic_global, mbi_global);
+				break;
+			case 'm':
+				clearscr();
+				print_memory_map(mbi_global);
+				break;
+			}
 			break;
 
-		default:
-			break;
-	}
-	return 0;
-}
-
-void sys_call(int num)
-{
-	switch(num)
-	{
 		case INT128:
 			printf("UNIX SYCALL\n");
 			break;
 		default:
 			break;
+
 	}
 }
 
-int schedular()
+
+void schedular(void)
 {
-
 	rotate_queue();
-	return process[0];
-/*
-	switch(task){
-		case NONE:
-			task=TASK1;
-			return task1_esp;
-    			break;
-		case TASK1:
-			task=TASK2;
-			return task2_esp;
-			break;
-		case TASK2:
-			task=TASK1;
-			return task1_esp;
-			break;
-		default:
-			task=TASK1;
-			return task1_esp;
-			break;
-	}
-	return task1_esp;
-*/
-
+	osdk_task_switch((task_t *)process[0]);
 }
 
 void panic(char *msg)

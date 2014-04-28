@@ -25,25 +25,22 @@
 #define TASK3 3
 
 extern int task;
-extern unsigned char task1_kstack[2000];
-extern unsigned char task2_kstack[2000];
-extern unsigned char task3_kstack[2000];
-extern unsigned char task1_ustack[2000];
-extern unsigned char task2_ustack[2000];
-extern unsigned char task3_ustack[2000];
-extern unsigned int task1_esp;
-extern unsigned int task2_esp;
-extern unsigned int task3_esp;
+extern unsigned char task1_stack[2000];
+extern unsigned char task2_stack[2000];
+extern unsigned char task3_stack[2000];
+
+extern task_t task1;
+extern task_t task2;
+extern task_t task3;
 
 extern unsigned int process[2];
 extern unsigned int procname[2];
 
 
 void print_task(task_t *);
-void print_2task(task_t *, task_t*);
 
-void task1(void);
-void task2(void);
-void task3(void);
+void task1_main(void);
+void task2_main(void);
+void task3_main(void);
 
 #endif

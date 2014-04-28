@@ -60,6 +60,9 @@ osdk_main:
 	pop	dword eax
 	push	dword ebx
 	push	dword eax
+	mov	dword [ksize], 1024
+	mov	dword [rsize], 76
+ 	mov	dword [task], 0
 	call	main					; Call the C main() function
 	cli
 	hlt
@@ -71,6 +74,7 @@ osdk_lock:
 osdk_unlock:
 	sti
 	ret
+
 
 %include 'isr.asm'
 %include 'idt.asm'
@@ -85,5 +89,5 @@ osdk_unlock:
 section .bss
 	align 32
 STACKSIZE		equ		1024000
-STACK	resb		STACKSIZE		; reserve 128k stack on a quadword boundary
+STACK			resb		STACKSIZE		; reserve 128k stack on a quadword boundary
 

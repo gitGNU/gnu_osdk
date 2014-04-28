@@ -24,9 +24,9 @@ idt_info:
 idt:	
 	times	0ffh*8h	db	0h
 
-set_idesc:
-	; ebx : isr
-	; ecx :	int number
+set_idesc0:
+	; ebx : interrupt service routine
+	; ecx : int number
 	push	eax
 	push	ebx
 	push	edx
@@ -42,6 +42,31 @@ set_idesc:
 	mov	[esi+2], word 08h
 	mov	[esi+4], byte 0h
 	mov	[esi+5], byte 10001110b
+	mov	[esi+6], word dx
+	pop	esi
+	pop	edx
+	pop	ebx
+	pop	eax
+	ret
+
+set_idesc3:
+	; ebx : interrupt service routine
+	; ecx : int number
+	push	eax
+	push	ebx
+	push	edx
+	push	esi
+	mov	eax, 08h
+	mul	ecx
+	add	eax, idt
+	mov	edx, ebx
+	and	ebx, 0ffffh
+	shr	edx, 10h
+	mov	esi, eax
+	mov	[esi], word bx
+	mov	[esi+2], word 08h
+	mov	[esi+4], byte 0h
+	mov	[esi+5], byte 11101110b
 	mov	[esi+6], word dx
 	pop	esi
 	pop	edx

@@ -25,11 +25,6 @@ void itoa(int num, int base, char *buffer)
 	int tmp[30];
 	if(num < 0)
 		*buffer++='-';
-	if(base == 16)
-	{
-		*buffer++='0';
-		*buffer++='x';
-	}
 	num=abs(num);
 	if(num < base)
 		*buffer++=hexdigit(num);	
@@ -108,7 +103,7 @@ void printf(char *fmt, ...)
 						itoa(__builtin_va_arg(va ,int), DEC, buffer);
 						puts(buffer);
 						break;
-					case 'h':
+					case 'x':
 						itoa(__builtin_va_arg(va ,int), HEX, buffer);
 						puts(buffer);
 						break;

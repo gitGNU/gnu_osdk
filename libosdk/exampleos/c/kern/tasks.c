@@ -21,27 +21,23 @@
 #include <string.h>
 
 int task;
-unsigned char task1_kstack[2000];
-unsigned char task2_kstack[2000];
-unsigned char task3_kstack[2000];
-unsigned char task1_ustack[2000];
-unsigned char task2_ustack[2000];
-unsigned char task3_ustack[2000];
-unsigned int task1_esp;
-unsigned int task2_esp;
-unsigned int task3_esp;
-
+task_t task1;
+task_t task2;
+task_t task3;
+unsigned char task1_stack[2000];
+unsigned char task2_stack[2000];
+unsigned char task3_stack[2000];
 unsigned int process[2];
 unsigned int procname[2];
 
-void task1()
+void task1_main()
 {
 	int x=1, y=2;
 		
 	x++;
 	y=x+3;
 
-	printf("Task1\n");
+	printf("Task1 Started.\n");
 
 /*
 	while(1)
@@ -65,14 +61,14 @@ void task1()
 	for(;;);
 }
 
-void task2()
+void task2_main()
 {
 	int x=5, y=3;
 		
 	x++;
 	y=x+2;
 
-	printf("Task2\n");
+	printf("Task2 Started.\n");
 	
 	//asm("int $0x80");
 	//asm("cli");
@@ -98,57 +94,32 @@ void task2()
 	for(;;);
 }
 
-void task3()
+void task3_main()
 {
-	printf("Task3\n");
+	printf("Task3 Started.\n");
 	for(;;);
 }
 
 void print_task(task_t *t)
 {
-	printf("ss3= %h\n", t->ss3);
-	printf("esp3= %h\n", t->esp3);
-	printf("eflags= %h\n", t->eflags);
-	printf("cs= %h\n", t->cs);
-	printf("eip= %h\n", t->eip);
-	printf("eax= %h\n", t->eax);
-	printf("ecx= %h\n", t->ecx);
-	printf("edx= %h\n", t->edx);
-	printf("ebx= %h\n", t->ebx);
-	printf("esp= %h\n", t->esp);
-	printf("ebp= %h\n", t->ebp);
-	printf("esi= %h\n", t->esi);
-	printf("edi= %h\n", t->edi);
-	printf("gs= %h\n", t->gs);
-	printf("fs= %h\n", t->fs);
-	printf("es= %h\n", t->es);
-	printf("ds= %h\n", t->ds);
-	printf("error= %h\n", t->error);
-	printf("interrupt= %h\n", t->interrupt);
+	printf("ss3= 0x%x\n", t->regs.ss3);
+	printf("esp3= 0x%x\n", t->regs.esp3);
+	printf("eflags= 0x%x\n", t->regs.eflags);
+	printf("cs= 0x%x\n", t->regs.cs);
+	printf("eip= 0x%x\n", t->regs.eip);
+	printf("eax= 0x%x\n", t->regs.eax);
+	printf("ecx= 0x%x\n", t->regs.ecx);
+	printf("edx= 0x%x\n", t->regs.edx);
+	printf("ebx= 0x%x\n", t->regs.ebx);
+	printf("esp= 0x%x\n", t->regs.esp);
+	printf("ebp= 0x%x\n", t->regs.ebp);
+	printf("esi= 0x%x\n", t->regs.esi);
+	printf("edi= 0x%x\n", t->regs.edi);
+	printf("gs= 0x%x\n", t->regs.gs);
+	printf("fs= 0x%x\n", t->regs.fs);
+	printf("es= 0x%x\n", t->regs.es);
+	printf("ds= 0x%x\n", t->regs.ds);
+	printf("error= 0x%x\n", t->regs.error);
+	printf("interrupt= 0x%x\n", t->regs.interrupt);
 }
-
-void print_2task(task_t *t1, task_t *t2)
-{
-	printf("Task1:\t\t\t\tTask2:\n");
-	printf("ss3= %h\t\t\t\tss3= %h\n", t1->ss3, t2->ss3);
-	printf("esp3= %h\t\t\t\tesp3= %h\n", t1->esp3, t2->esp3);
-	printf("eflags= %h\t\t\t\teflags= %h\n", t1->eflags, t2->eflags);
-	printf("cs= %h\t\t\t\tcs= %h\n", t1->cs, t2->cs);
-	printf("eip= %h\t\t\t\teip= %h\n", t1->eip, t2->eip);
-	printf("eax= %h\t\t\t\teax= %h\n", t1->eax, t2->eax);
-	printf("ecx= %h\t\t\t\tecx= %h\n", t1->ecx, t2->ecx);
-	printf("edx= %h\t\t\t\tedx= %h\n", t1->edx, t2->edx);
-	printf("ebx= %h\t\t\t\tebx= %h\n", t1->ebx, t2->ebx);
-	printf("esp= %h\t\t\t\tesp= %h\n", t1->esp, t2->esp);
-	printf("ebp= %h\t\t\t\tebp= %h\n", t1->ebp, t2->ebp);
-	printf("esi= %h\t\t\t\tesi= %h\n", t1->esi, t2->esi);
-	printf("edi= %h\t\t\t\tedi= %h\n", t1->edi, t2->edi);
-	printf("gs= %h\t\t\t\tgs= %h\n", t1->gs, t2->gs);
-	printf("fs= %h\t\t\t\tfs= %h\n", t1->fs, t2->fs);
-	printf("es= %h\t\t\t\tes= %h\n", t1->es, t2->es);
-	printf("ds= %h\t\t\t\tds= %h\n", t1->ds, t2->ds);
-	printf("error= %h\t\t\t\terror= %h\n", t1->error, t2->error);
-	printf("interrupt= %h\t\t\t\tinterrupt=%h\n", t1->interrupt, t2->interrupt);
-}
-
 

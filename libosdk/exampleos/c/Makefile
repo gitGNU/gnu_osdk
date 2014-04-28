@@ -1,5 +1,5 @@
-CC=/opt/cross/bin/gcc
-LD=/opt/cross/bin/ld
+CC=gcc
+LD=ld
 CC_FLAGS=-Wall -O -nostdinc -nostdlib -fstrength-reduce -fomit-frame-pointer -finline-functions -fno-builtin -ffreestanding -nostartfiles -nodefaultlibs
 LD_FLAGS=-T ./linker.ld
 

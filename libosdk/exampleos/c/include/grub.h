@@ -19,6 +19,10 @@
 #ifndef _GRUB_H
 #define _GRUB_H
 
+extern unsigned int magic_global;
+extern multiboot_info_t *mbi_global;
+
 void print_multiboot_info(unsigned int, multiboot_info_t *);
+void print_memory_map(multiboot_info_t *);
 
 #endif

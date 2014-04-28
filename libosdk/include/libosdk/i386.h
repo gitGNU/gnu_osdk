@@ -33,8 +33,9 @@ typedef unsigned char byte_t;
 typedef unsigned short word_t;
 typedef unsigned long dword_t;
 
-/* An Address pointer */
-typedef void * addr_t;
+#ifndef _MAX_KSTACK
+	#define _MAX_KSTACK	1024
+#endif
 
 /* Interrupts */
 #define INT0 0x00
@@ -332,8 +333,10 @@ typedef void * addr_t;
 #define _ALIGNMENT_CHECK_EXCEPTION		0x11		/* Alignment Check Exception */
 #define _MACHINE_CHECK					0x12		/* Machine Check */
 
-/* Per-Process Kernel Stack */
-typedef struct task_s{
+
+/* Registers */
+
+typedef struct regs_s{
 	dword_t interrupt;
 	dword_t error;
 	dword_t ds;
@@ -353,26 +356,37 @@ typedef struct task_s{
 	dword_t eflags;
 	dword_t esp3;
 	dword_t ss3;
-}task_t;
+}__attribute__((packed)) regs_t;
+
+/* Per-Process Kernel Stack */
+
+typedef struct task_s{
+	char stack[_MAX_KSTACK] ;
+	regs_t regs;
+}__attribute__((packed)) task_t;
+	
 
 /* Function Prototyping */
-void osdk_out(unsigned short, unsigned char);
-unsigned char osdk_in(unsigned short);
-void osdk_timerhz(unsigned short);
-unsigned char osdk_getch(void);
-void osdk_putchar(char, char, unsigned int);
-unsigned int osdk_create_task(unsigned char *, unsigned char *, unsigned char *);
-int osdk_get_esp(void);
-int osdk_get_tss_esp0(void);
-int osdk_get_ss(void);
-int osdk_get_eflags(void);
-int osdk_test(void);
-int osdk_set_tr(void);
-int osdk_get_cs(void);
-unsigned int osdk_get_cr0(void);
-unsigned int osdk_get_cr4(void);
+
+/* Tasks */
+dword_t osdk_task_create(task_t*, void (*)(), unsigned char*);
+void osdk_task_switch(task_t*);
+
+/* I/O Ports */
+void osdk_out(word_t, byte_t);
+byte_t osdk_in(word_t);
+
+/* Interrupts */
 void osdk_lock(void);
 void osdk_unlock(void);
 
+/* Timer */
+void osdk_timerhz(unsigned short);
+
+/* Key Board */
+unsigned char osdk_getch(void);
+
+/* VGA */
+void osdk_putchar(char, char, unsigned int);
 
 #endif

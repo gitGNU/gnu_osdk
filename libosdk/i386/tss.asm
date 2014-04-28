@@ -17,7 +17,17 @@
 
 bits 32
 
-global osdk_create_task
+global osdk_task_create
+global osdk_task_switch
+global task
+global ksize
+global rsize
+
+align	4
+
+task		dd	0h
+ksize	dd	0h
+rsize		dd	0h
 
 tss:
 	back_link	dw	0h
@@ -76,10 +86,14 @@ set_tr:
 	pop	eax
 	ret
 
-osdk_create_task:
+osdk_task_create:
 	push	ebp
 	mov	ebp, esp
 	mov eax, dword [ebp+08]
+	; eax just holds the address of task_t's beginning but we need its end ;-)
+	; so we need to add the size of kstack & regs_t to get the address of the task_t's end.
+	add	eax, [ksize]
+	add	eax, [rsize]
 	mov	esp, eax			; Per-Process Kernel Stack
 	push dword 	100011b	; ss3
 	mov	eax, dword [ebp+16]
@@ -107,4 +121,14 @@ osdk_create_task:
 	pop	ebp
 	ret
 
-
+osdk_task_switch:
+	push ebp
+	mov	ebp, esp
+	mov	eax, [ebp+08]
+	; we need to add the size of kstack
+	add	eax, [ksize]
+	mov	[task], eax
+	mov	esp, ebp
+	pop	ebp
+	ret
+	

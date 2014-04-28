@@ -25,10 +25,7 @@ extern unsigned int seconds;
 int main(unsigned int, multiboot_info_t *);
 
 void interrupt(int, int);
-int pic_irq(int);
-void sys_call(int);
-
-int schedular(void);
+void schedular(void);
 void rotate_queue(void);
 
 void panic(char *);
