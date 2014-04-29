@@ -1,5 +1,4 @@
-# i386/string.asm
-# Copyrights (c) 2005-2007 Mohamed Abdelsalam Aslan <maslan@users.berlios.de>
+# Copyrights (c) 2005-2007 Mohamed Abdelsalam Aslan <maslan@sce.carleton.ca>
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public

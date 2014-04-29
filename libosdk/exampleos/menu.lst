@@ -6,7 +6,7 @@ title CKernel
 root (fd0)
 kernel /boot/ckernel
 
-# Pas Kernel
+# Pascal Kernel
 title PasKernel
 root (fd0)
 kernel /boot/paskernel

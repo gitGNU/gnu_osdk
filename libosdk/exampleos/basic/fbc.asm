@@ -1,4 +1,3 @@
-; exampleos/basic/fbc.asm
 ; Copyrights (c) 2005 Mohamed Abdelsalam Aslan <maslan@users.berlios.de>
 ;
 ; This library is free software; you can redistribute it and/or
